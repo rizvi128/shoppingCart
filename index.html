@@ -25,11 +25,11 @@
 
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button class="btn btn-default"  id="minusBtn"><i class="fas fa-minus"></i></button>
+                           <input type="text" class="form-control text-center" id="inputText" value="1">
+                           <button class="btn btn-default"  id="plusBtn"><i class="fas fa-plus"></i></button>
                         </div>
-                        <h5>$1219</h5>
+                        <h5>$ <span id="mobilePrice"> 1219 </span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -43,12 +43,12 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button class="btn btn-default" id="minusBtnCasing"><i class="fas fa-minus"></i></button>
+                           <input type="text" class="form-control text-center" id="inputTextCasing" value="1">
+                           <button class="btn btn-default" id="plusBtnCasing"><i class="fas fa-plus"></i></button>
 
                         </div>
-                        <h5>$59</h5>
+                        <h5>$<span id="casingPrice">59</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -64,9 +64,9 @@
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$1,278</h5>
+                        <h5>$<span id="subtotal">1,278</span></h5>
                         <h5>$0</h5>
-                        <h5>$1,278</h5>
+                        <h5>$<span id="total">1,278</span></h5>
                      </div>
                   </div>
                </div>
@@ -77,6 +77,136 @@
          </div>
       </div>
    </section>
+   
+<script>
+
+//            plus Btn eventHandler        //
+
+//mobile
+const plusBtn = document.getElementById("plusBtn");
+plusBtn.addEventListener("click", function(){
+   increasingQuantity("inputText");
+   const inputText = document.getElementById("inputText").value;
+  const inputNumber = parseFloat(inputText);
+   mobilePrice("mobilePrice", inputNumber);
+   updateTotal()
+
+})
+
+//casing
+const plusBtnCasing = document.getElementById("plusBtnCasing");
+plusBtnCasing.addEventListener("click", function(){
+   increasingQuantity("inputTextCasing");
+   const inputText = document.getElementById("inputTextCasing").value;
+  const inputNumber = parseFloat(inputText);
+   casingPrice("casingPrice", inputNumber);
+   updateTotal()
+
+
+
+})
+
+
+
+
+//             minus button event handler       //
+
+//mobile
+const minusBtn = document.getElementById("minusBtn");
+minusBtn.addEventListener("click", function(){
+   decreasingQuantity("inputText");
+   const inputText = document.getElementById("inputText").value;
+  const inputNumber = parseFloat(inputText);
+   mobilePrice("mobilePrice", inputNumber);
+   updateTotal()
+   
+})
+//casing
+const minusBtnCasing = document.getElementById("minusBtnCasing");
+minusBtnCasing.addEventListener("click", function(){
+   decreasingQuantity("inputTextCasing");
+   const inputText = document.getElementById("inputTextCasing").value;
+  const inputNumber = parseFloat(inputText);
+   casingPrice("casingPrice", inputNumber);
+   updateTotal()
+
+})
+
+//plus button functionality
+function increasingQuantity(id){
+   const inputText = document.getElementById(id).value;
+  const inputNumber = parseFloat(inputText);
+   const total = inputNumber + 1;
+   document.getElementById(id).value = total;
+   
+ }
+
+//minus button functionality
+ function decreasingQuantity(id){
+   const inputText = document.getElementById(id).value;
+  const inputNumber = parseFloat(inputText);
+   const total = inputNumber - 1;
+   document.getElementById(id).value = total;
+ }
+  //update Mobile price
+
+
+function mobilePrice(id, numberOfPhone){
+   const phonePrice = document.getElementById(id).innerText;
+   const priceInNumber = parseFloat(phonePrice);
+
+   const updatePrice = numberOfPhone * 1219;
+   document.getElementById(id).innerText = updatePrice;
+
+
+}
+
+function casingPrice(id, numberOfCasing){
+   const casingPrice = document.getElementById(id).innerText;
+   const priceInNumber = parseFloat(casingPrice);
+
+   const updatePrice = numberOfCasing * 59;
+   document.getElementById(id).innerText = updatePrice;
+
+
+}
+
+
+
+////update total 
+function updateTotal(){
+    const subtotal = document.getElementById("subtotal").innerText;
+    const subtotalNumber = parseFloat(subtotal);
+     
+   const casingPrice = document.getElementById("casingPrice").innerText;
+   const casingPriceInNumber = parseFloat(casingPrice);
+
+   const phonePrice = document.getElementById("mobilePrice").innerText;
+   const phonePriceInNumber = parseFloat(phonePrice);
+     
+  const total = document.getElementById("subtotal").innerText = casingPriceInNumber + phonePriceInNumber;
+
+   return total;
+
+
+
+
+}
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
 </body>
 
 </html>
